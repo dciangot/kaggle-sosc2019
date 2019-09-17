@@ -6,6 +6,7 @@ Vagrant.require_version ">= 1.7.0"
 Vagrant.configure(2) do |config|
 
   config.vm.box = "ubuntu/bionic64"
+  config.disksize.size = "30GB"
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 8128
@@ -17,6 +18,7 @@ Vagrant.configure(2) do |config|
   # See https://github.com/hashicorp/vagrant/issues/5005
   config.ssh.insert_key = false
 
-  config.vm.provision "shell", path: "scripts/install.sh"
+  config.vm.provision "shell", path: "scripts/download_conda.sh" , privileged: false
+  config.vm.provision "shell", path: "scripts/install_conda.sh", privileged: false
 
 end
